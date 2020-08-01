@@ -1,102 +1,68 @@
 import React, { Component } from 'react';
 
 class Carousel extends Component {
-    constructor(props){
-        super(props);
-
-        this.state = {
-            activeIndex: 0
-        };
+    state = {
+        data:{}
     }
+    componentDidMount() {
+        this.getData();
+    };
 
-    prevSlide(e) {
-        e.preventDfault();
-
-        let index = this.state.activeIndex;
-        let { slides } = this.props;
-        let slidesLength = slides.length;
-
-        if (index < 1) {
-            index = slidesLength;
-        }
-
-        --index;
-
-        this.setState({
-            activeIndex: index
-        });
-    }
-
-    nextSlide(e) {
-        e.preventDfault();
-
-        let index = this.state.activeIndex;
-        let { slides } = this.props;
-        let slidesLength = slides.length - 1;
-
-        if (index === slidesLength) {
-            index = -1;
-        }
-
-        ++index;
-
-        this.setState({
-            activeIndex: index
-        });
-    }
+    getData = () => {
+        fetch('https://gnews.io/api/v3/top-news?token=990d9071ebb8b5c6202a5b355abf617f')
+        .then(data => data.json())
+        .then(data => this.setState({data}))
+    };
 
     render() {
+        // const article = {state.data.articles ? this.state.data.article[0]] : ""}
+        console.log(this.state.data.articles ? this.state.data.articles[0] : "")
         return (
-            <div className="carousel-container">
-                <a href="#" className="carousel__arrow carousel__arrow--left" onClick={e => prevSlide(e)}>
-                   <span className="fa fa-2x fa-angle-left"></span> 
-                </a>
+            <div id="myCarousel" className="carousel slide" data-ride="carousel">
+                {/* <ol className="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" className="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>
 
-                <ul className="carousel__slides">
-                    {this.props.slides.map((slide, index) => 
-                        <li className={index == this.state.activeIndex ? "carousel__slide carousel__slide--active" : "carousel__slide"} key={index}>
-                            <p className="carousel-slide__content">{slide.content}</p>
-                            <p>
-                                <strong className="carousel-slide__author">
-                                    {slide.author}
-                                </strong>,
-                                {" "}
-                                <small className="carousel-slide__source">
-                                    {slide.source}
-                                </small>
-                            </p>
-                        </li>
-                    )}
-                </ul>
-                <a
-          href="#"
-          className="carousel__arrow carousel__arrow--right"
-          onClick={e => this.goToNextSlide(e)}
-        >
-          <span className="fa fa-2x fa-angle-right" />
-        </a>
-        <ul className="carousel__indicators">
-          {this.props.slides.map((slide, index) =>
-            <li key={index}>
-              <a
-                className={
-                  index == this.state.activeIndex
-                    ? "carousel__indicator carousel__indicator--active"
-                    : "carousel__indicator"
-                }
-                onClick={e => this.goToSlide(index)}
-              />
-            </li>
-          )}
-        </ul>
+                
+                <div className="carousel-inner">
+                    <div className="item active">
+                    <h1>{article.title}</h1>
+                    <p>{article.description}</p>
+                    <p>{article.source.name}</p>
+                    <small>{article.url}</small>
+                    </div>
+                    <div className="item">
+                        <h1>{article.title}</h1>
+                        <p>{article.description}</p>
+                        <p>{article.source.name}</p>
+                        <small>{article.url}</small>
+                    </div>
+
+                    <div className="item">
+                        <h1>{article.title}</h1>
+                        <p>{article.description}</p>
+                        <p>{article.source.name}</p>
+                        <small>{article.url}</small>
+                    </div>
+                </div>
+
+            
+            <a className="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span className="glyphicon glyphicon-chevron-left"></span>
+                <span className="sr-only">Previous</span>
+            </a>
+            <a className="right carousel-control" href="#myCarousel" data-slide="next">
+                <span className="glyphicon glyphicon-chevron-right"></span>
+                <span className="sr-only">Next</span>
+            </a> */}
             </div>
         )
-
-        
-    
-}
+    }
 
 }
-render(<Carousel slides={carouselSlidesData} />, carouselContainer);
+
+
 
 export default Carousel;
