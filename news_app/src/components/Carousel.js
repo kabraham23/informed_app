@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Carousel extends Component {
+class NewsCarousel extends Component {
     state = {
         data:{}
     }
@@ -14,59 +14,52 @@ class Carousel extends Component {
         .then(data => this.setState({data}))
     };
 
+    
+
     render() {
-        console.log(this.state.data.articles ? this.state.data.articles[0] : "")
+        // console.log(this.state.data.articles ? this.state.data.articles[0] : "")
         return(
         
             <div id="myCarousel" className="carousel slide" data-ride="carousel">
-                {this.state.data.articles[0].map((data) => {
+                    {Object.keys(this.state.data).length && this.state.data.articles.map((data) => {
                     return (
-                        <ol className="carousel-indicators">
+                        <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
+                        <ol className="carousel-indicators" activeItem={1} length={10}>
                         <li data-target="#myCarousel" data-slide-to="0" className="active"></li>
                         <li data-target="#myCarousel" data-slide-to="1"></li>
                         <li data-target="#myCarousel" data-slide-to="2"></li>
-                    </ol>
+                        </ol>
     
                     
-                    <div className="carousel-inner">
+                        <div className="carousel-inner">
                         <div className="item active">
-                        <h1>{this.props.data.articles ? this.props.data.articles[0].title : ""}</h1>
-                        <p>{this.props.data.articles ? this.props.data.articles[0].description : ""}</p>
-                        <p>{this.props.data.articles ? this.props.data.articles[0].source.name : ""}</p>
-                        <small>{this.props.data.articles ? this.props.data.articles[0].url : ""}</small>
+                            <h1>{data.title}</h1>
+                            <p>{data.description}</p>
+                            <p>{data.source.name}</p>
+                            <small>{data.url}</small>
                         </div>
-                        <div className="item">
-                            <h1>{this.props.data.articles ? this.props.data.articles[1].title : ""}</h1>
-                            <p>{this.props.data.articles ? this.props.data.articles[1].description : ""}</p>
-                            <p>{this.props.data.articles ? this.props.data.articles[1].source.name : ""}</p>
-                            <small>{this.props.data.articles ? this.props.data.articles[1].url : ""}</small>
-                        </div>
-    
-                        <div className="item">
-                            <h1>{this.props.data.articles ? this.props.data.articles[2] : "".title}</h1>
-                            <p>{this.props.data.articles ? this.props.data.articles[2] : "".description}</p>
-                            <p>{this.props.data.articles ? this.props.data.articles[2].source.name : ""}</p>
-                            <small>{this.props.data.articles ? this.props.data.articles[2].url : ""}</small>
-                        </div>
+                        
                     </div>
     
                 
-                <a className="left carousel-control" href="#myCarousel" data-slide="prev">
-                    <span className="glyphicon glyphicon-chevron-left"></span>
-                    <span className="sr-only">Previous</span>
-                </a>
-                <a className="right carousel-control" href="#myCarousel" data-slide="next">
-                    <span className="glyphicon glyphicon-chevron-right"></span>
-                    <span className="sr-only">Next</span>
-                </a>
-                })}
-        }
+                    <a className="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                        <span className="glyphicon glyphicon-chevron-left"></span>
+                        <span className="sr-only">Previous</span>
+                    </a>
+                    <a className="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                        <span className="glyphicon glyphicon-chevron-right"></span>
+                        <span className="sr-only">Next</span>
+                    </a>
+                    </div>
+                )
+                })
+                }
             </div>
         )
-        };
+    };
        
-    }
+}
 
 
 
-export default Carousel;
+export default NewsCarousel;

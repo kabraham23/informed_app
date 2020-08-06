@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import UserLogin from './UserLogin';
+import UserLogin from './registrations/UserLogin';
 
 class Navigation extends Component {
     render() {
@@ -8,7 +8,7 @@ class Navigation extends Component {
                 <a href="/informed">Home</a>
                 <a href="#">Global</a>
                 <a href="#">US</a>
-                <a href="UserLogin" onClick={<UserLogin />}>User Login</a>
+                <a href="/user/login">User login</a>
             </div>
         )
     }
